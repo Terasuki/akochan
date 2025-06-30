@@ -765,17 +765,17 @@ std::pair<int, int> cal_next_bakaze_kyoku(const Moves& game_record) {
     } else if ((kyoku_result["type"].string_value() == "hora" && kyoku_result["actor"].int_value() == oya) ||
         (kyoku_result["type"].string_value() == "ryukyoku" && kyoku_result["tenpais"].array_items()[oya].bool_value())
     ) {
-        if (is_last_kyoku(bakaze, kyoku, "tonpu") && kyoku_result["scores"].array_items()[oya].int_value() >= 30000 && has_highest_score(kyoku_result, oya)) {
+        if (is_last_kyoku(bakaze, kyoku, "tonnan") && kyoku_result["scores"].array_items()[oya].int_value() >= 30000 && has_highest_score(kyoku_result, oya)) {
             return std::pair<int, int> (-1, -1);
-        } else if (is_definite_last_kyoku(bakaze, kyoku, "tonpu") && has_highest_score(kyoku_result, oya)) {
+        } else if (is_definite_last_kyoku(bakaze, kyoku, "tonnan") && has_highest_score(kyoku_result, oya)) {
             return std::pair<int, int> (-1, -1);
         } else {
             return std::pair<int, int> (bakaze, kyoku);
         }
     } else {
-        if (is_last_kyoku(bakaze, kyoku, "tonpu") && is_30000_any(kyoku_result)) {
+        if (is_last_kyoku(bakaze, kyoku, "tonnan") && is_30000_any(kyoku_result)) {
             return std::pair<int, int> (-1, -1);
-        } else if (is_definite_last_kyoku(bakaze, kyoku, "tonpu")) {
+        } else if (is_definite_last_kyoku(bakaze, kyoku, "tonnan")) {
             return std::pair<int, int> (-1, -1);
         } else {
             return std::pair<int, int> (kyoku == 4 ? bakaze + 1 : bakaze, kyoku == 4 ? 1 : kyoku + 1);
