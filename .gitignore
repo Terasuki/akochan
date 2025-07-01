@@ -12,3 +12,7 @@ ai_src/obj/*
 *.ll
 raw_log
 match_result*
+*.ipynb
+.DS_Store
+*.pyc
+*.parquet
