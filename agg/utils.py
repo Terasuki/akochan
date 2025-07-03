@@ -1,6 +1,6 @@
 import json
 
-def process_mahjong_log(log_file):
+def find_reach(log_file):
     reach_hands = []
     
     player_hands = [[] for _ in range(4)]
@@ -91,7 +91,24 @@ def process_mahjong_log(log_file):
 
     return reach_hands
 
-if __name__ == "__main__":
-    results = process_mahjong_log("/Users/terasuki/Documents/Projects/akochan/match_result/haifu_log_0_0.json")
-    for result in results:
-        print(json.dumps(result))
+def count_rounds(log_file):
+
+    rounds = []
+    current_kyoku_data = {}
+
+    with open(log_file, "r") as f:
+        for line in f:
+            event = json.loads(line)
+            if event["type"] == "start_kyoku":
+                current_kyoku_data = {
+                    "bakaze": event["bakaze"],
+                    "dora_marker": event["dora_marker"],
+                    "honba": event["honba"],
+                    "kyoku": event["kyoku"],
+                    "kyotaku": event["kyotaku"],
+                    "oya": event["oya"],
+                    "scores": event["scores"]
+                }
+                rounds.append(current_kyoku_data)
+    
+    return rounds
